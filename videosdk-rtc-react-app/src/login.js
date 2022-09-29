@@ -1,8 +1,13 @@
 const firebaseConfig = {
-   //moet nog connectie maken
-  };
- 
-  
+  apiKey: "AIzaSyCWf86SuAbS5Rus76MC9vLPsgLnh0Y8jcI",
+  authDomain: "streame-2e066.firebaseapp.com",
+  projectId: "streame-2e066",
+  storageBucket: "streame-2e066.appspot.com",
+  messagingSenderId: "226823067970",
+  appId: "1:226823067970:web:5d90acd31c7c77da35d0db",
+  measurementId: "G-DCBP6THP9P"
+};
+
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   
@@ -18,7 +23,6 @@ const firebaseConfig = {
     let email = document.getElementById('email').value
     let password = document.getElementById('password').value
     let username = document.getElementById('username').value
-
     
     const falseUsername = document.getElementById('failUsername')
     const falseMail = document.getElementById('failMail')
