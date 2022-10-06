@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './style';
-import {Navbar, Billing, CardDeal, Business, Clients, CTA, Stats, Footer, Testimonials, Hero, CreateMeeting, Login} from './components';
+import {Navbar, Billing, CardDeal, Business, Clients, CTA, Stats, Footer, Testimonials, Hero, CreateMeeting, SignIn, SignUp } from './components';
 
 function App() {
   return (
@@ -30,7 +30,10 @@ function App() {
         </div>
       </div>
       <CreateMeeting/>
-      <Login/>
+      <SignIn/>
+      <SignUp/>
+     
+      
     </div>
   );
 }

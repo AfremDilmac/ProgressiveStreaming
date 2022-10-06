@@ -9,7 +9,9 @@ import Footer from "./Footer";
 import Testimonials from "./Testimonials";
 import Hero from "./Hero";
 import CreateMeeting from "./CreateMeeting";
-import Login from "./Login";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
+
 
 export {
   Navbar,
@@ -23,5 +25,6 @@ export {
   Testimonials,
   Hero,
   CreateMeeting,
-  Login,
+  SignUp,
+  SignIn,
 };
