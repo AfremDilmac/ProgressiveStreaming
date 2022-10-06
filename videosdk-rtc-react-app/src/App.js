@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   MeetingProvider,
@@ -8,6 +7,9 @@ import {
 } from "@videosdk.live/react-sdk";
 import { authToken, createMeeting, fetchHlsDownstreamUrl} from "./API";
 import ReactPlayer from "react-player";
+import styles from './style';
+
+import {Navbar, Billing, CardDeal, Business, Clients, CTA, Stats, Footer, Testimonials, Hero, CreateMeeting} from './components';
 
 function JoinScreen({ getMeetingAndToken }) {
   const [meetingId, setMeetingId] = useState(null);
@@ -232,6 +234,34 @@ function App() {
   const isHost = useMemo(() => mode ==='host', [mode])
 
   return (
+    <div className="bg-primary w-full overflow-hidden">
+      <div className={`${styles.paddingX} ${styles.flexCenter}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Navbar/>
+        </div>
+      </div>
+
+      <div className={`bg-primary ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Hero/>
+        </div>
+      </div>
+
+      <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.boxWidth}`}>
+          <Stats/>
+          <Business/>
+          <Billing/>
+          <CardDeal/>
+          <Testimonials/>
+          <Clients/>
+          <CTA/>
+          <Footer/>
+        </div>
+      </div>
+    </div>
+
+    //Meeting component:
   // <> 
   // <button onClick={() => {
   //   setMode(s => {
@@ -243,6 +273,7 @@ function App() {
   // </button>
   // {isHost ? <MeetingContainer /> : <HLSContainer />}
   // </>
+
   );
 }
 
