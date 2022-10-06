@@ -1,5 +1,9 @@
-import firebase from "firebase/app"
-import "firebase/auth"
+
+import { useEffect, useState } from "react";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 // REACT_APP_APIKEY=AIzaSyCWf86SuAbS5Rus76MC9vLPsgLnh0Y8jcI
 // REACT_APP_AUTHDOMAIN=streame-2e066.firebaseapp.com
@@ -11,7 +15,7 @@ import "firebase/auth"
 
 
 
-const firebaseConfig = firebase.initializeApp({
+const firebaseConfig = {
     apiKey: "AIzaSyCWf86SuAbS5Rus76MC9vLPsgLnh0Y8jcI",
     authDomain: "streame-2e066.firebaseapp.com",
     projectId: "streame-2e066",
@@ -19,7 +23,32 @@ const firebaseConfig = firebase.initializeApp({
     messagingSenderId: "226823067970",
     appId: "1:226823067970:web:5d90acd31c7c77da35d0db",
     measurementId: "G-DCBP6THP9P"
-  })
+}
 
-  export const auth = firebaseConfig.auth()
-  export default firebaseConfig
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth()
+
+// export default app
+export function signup(email, password) {
+    createUserWithEmailAndPassword(auth, email, password);
+}
+
+export function login(email, password) {
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+  
+  export function logout() {
+    return signOut(auth);
+  }
+  
+  // Custom Hook
+  export function useAuth() {
+    const [ currentUser, setCurrentUser ] = useState();
+  
+    useEffect(() => {
+      const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
+      return unsub;
+    }, [])
+  
+    return currentUser;
+  }
