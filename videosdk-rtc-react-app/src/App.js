@@ -232,17 +232,17 @@ function App() {
   const isHost = useMemo(() => mode ==='host', [mode])
 
   return (
-  <> 
-  <button onClick={() => {
-    setMode(s => {
-      return s === "host" ? "viewer" : "host";
-    });
-  }}
-  >
-    {isHost ? "Join as Viewer" : "Join as Host"}
-  </button>
-  {isHost ? <MeetingContainer /> : <HLSContainer />}
-  </>
+  // <> 
+  // <button onClick={() => {
+  //   setMode(s => {
+  //     return s === "host" ? "viewer" : "host";
+  //   });
+  // }}
+  // >
+  //   {isHost ? "Join as Viewer" : "Join as Host"}
+  // </button>
+  // {isHost ? <MeetingContainer /> : <HLSContainer />}
+  // </>
   );
 }
 
