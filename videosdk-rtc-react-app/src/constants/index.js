@@ -23,23 +23,23 @@ export const features = [
   {
     id: "feature-1",
     icon: star,
-    title: "Rewards",
+    title: "ShareYourDream",
     content:
-      "The best credit cards offer some tantalizing combinations of promotions and prizes",
+      "This is where your creative content comes to fruition. If you bring your passions, we'll help you build a community around them.",
   },
   {
     id: "feature-2",
     icon: shield,
-    title: "100% Secured",
+    title: "Find your own thing",
     content:
-      "We take proactive steps make sure your information and transactions are secure.",
+      "Self-aware fans, welcome home. See what you like, connect with streamers and chat with countless communities",
   },
   {
     id: "feature-3",
     icon: send,
-    title: "Balance Transfer",
+    title: "Reach an audience",
     content:
-      "A balance transfer credit card can save you a lot of money in interest charges.",
+      "Ready to build a real connection with a huge, engaged audience? We have no friends we'd like to introduce you to.",
   },
 ];
 
