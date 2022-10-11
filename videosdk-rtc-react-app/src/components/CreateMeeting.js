@@ -8,14 +8,12 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { authToken, createMeeting, fetchHlsDownstreamUrl} from "../API";
 import ReactPlayer from "react-player";
 
-
 function JoinScreen({ getMeetingAndToken }) {
   const [meetingId, setMeetingId] = useState(null);
   const onClick = async () => {
     await getMeetingAndToken(meetingId);
   };
   return (
-    
     <div>
       <input
         type="text"
@@ -33,7 +31,6 @@ function JoinScreen({ getMeetingAndToken }) {
 function HLSJoinScreen({ onDownstreamUrl }) {
   
   const [meetingId, setMeetingId] = useState(null);
-
   const handleOnClick = async (meetingId) => {
     const downstreamUrl = await fetchHlsDownstreamUrl({ meetingId });
 
@@ -41,7 +38,6 @@ function HLSJoinScreen({ onDownstreamUrl }) {
   };
 
   return (
-    
     <div>
       <input
         type="text"

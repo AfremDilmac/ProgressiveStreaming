@@ -7,7 +7,6 @@ const CardDeal = () => (
     <div className={layout.sectionInfo}>
       <h2 className={styles.heading2}>
         Start meeting without limits,  get <span className="text-gradient">Premium</span>
-        
       </h2>
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
         Want to start a meeting everywhere, anytime get Premium 
@@ -15,8 +14,6 @@ const CardDeal = () => (
 
       <Button styles={`mt-10`} />
     </div>
-
- 
   </section>
 );
 

@@ -19,17 +19,6 @@ const SignUp = () => {
         }
         setLoading(false);
       }
-
-    //   logIn
-    //   async function handleLogin() {
-    //     setLoading(true);
-    //     try {
-    //       await login(emailRef.current.value, passwordRef.current.value);
-    //     } catch {
-    //       alert("Error!");
-    //     }
-    //     setLoading(false);
-    //   }
     
     //logout
     //   async function handleLogout() {

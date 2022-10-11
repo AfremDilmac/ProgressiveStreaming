@@ -13,7 +13,6 @@ export const navLinks = [
     id: "product",
     title: "Product",
   },
- 
 ];
 
 export const features = [
@@ -78,7 +77,6 @@ export const stats = [
     title: "Trusted by Company",
     value: "0+",
   },
-  
 ];
 
 export const footerLinks = [

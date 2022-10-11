@@ -28,7 +28,6 @@ const Business = () =>  (
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
       StreaME is the place where 0 people gather live daily to chat, interact and create their own entertainment together.
       </p>
-
       <Button styles={`mt-10`} />
     </div>
 

@@ -24,7 +24,6 @@ function App() {
           <DownloadNow/>
           <GetPremium/>
           <Testimonials/>
-      
           <Promotion/>
           <Footer/>
         </div>
@@ -32,8 +31,6 @@ function App() {
       <CreateMeeting/>
       <SignIn/>
       <SignUp/>
-     
-      
     </div>
   );
 }
