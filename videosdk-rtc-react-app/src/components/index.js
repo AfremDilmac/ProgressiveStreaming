@@ -1,9 +1,8 @@
 import Navbar from "./Navbar";
-import Billing from "./Billing";
-import CardDeal from "./CardDeal";
-import Business from "./Business";
-import Clients from "./Clients";
-import CTA from "./CTA";
+import DownloadNow from "./DownloadNow";
+import GetPremium from "./GetPremium";
+import About from "./About";
+import Promotion from "./Promotion";
 import Stats from "./Stats";
 import Footer from "./Footer";
 import Testimonials from "./Testimonials";
@@ -15,11 +14,10 @@ import SignIn from "./SignIn";
 
 export {
   Navbar,
-  Billing,
-  CardDeal,
-  Business,
-  Clients,
-  CTA,
+  DownloadNow,
+  GetPremium,
+  About,
+  Promotion,
   Stats,
   Footer,
   Testimonials,
