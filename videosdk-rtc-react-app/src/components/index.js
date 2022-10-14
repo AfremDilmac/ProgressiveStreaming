@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import DownloadNow from "./DownloadNow";
+import DownloadSoon from "./DownloadSoon";
 import GetPremium from "./GetPremium";
 import About from "./About";
 import Promotion from "./Promotion";
@@ -13,7 +13,7 @@ import SignIn from "./SignIn";
 
 export {
   Navbar,
-  DownloadNow,
+  DownloadSoon,
   GetPremium,
   About,
   Promotion,

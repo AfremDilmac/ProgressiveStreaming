@@ -14,11 +14,11 @@ const Billing = () => (
     <div className={layout.sectionInfo}>
       <h2 className={styles.heading2}>
       Start a meeting everywhere,<br className="sm:block hidden" />
-       <span className="text-gradient">Download now</span>
+       <span className="text-gradient">Download SOON</span>
 
       </h2>
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-      Available on every platform
+      Available on every platform SOON
       </p>
 
       <div className="flex flex-row flex-wrap sm:mt-10 mt-6">

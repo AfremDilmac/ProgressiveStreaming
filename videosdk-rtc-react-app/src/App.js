@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './style';
-import {Navbar, DownloadNow, GetPremium, About, Promotion, Stats, Footer, Testimonials, Hero, CreateMeeting, SignIn, SignUp } from './components';
+import {Navbar, DownloadSoon, GetPremium, About, Promotion, Stats, Footer, Testimonials, Hero, CreateMeeting, SignIn, SignUp } from './components';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         <div className={`${styles.boxWidth}`}>
           <Stats/>
           <About/>
-          <DownloadNow/>
+          <DownloadSoon/>
           <GetPremium/>
           <Testimonials/>
           <Promotion/>

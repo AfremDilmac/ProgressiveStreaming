@@ -45,7 +45,7 @@ export const feedback = [
     content:
       "Very Good, Very nice",
     name: "Anthony Pornel ",
-    title: "Founder & Leader",
+    title: "Founder",
     img: people01,
   },
   {
@@ -53,7 +53,7 @@ export const feedback = [
     content:
       "Love the statistics",
     name: "Afrem Dilmac",
-    title: "Founder & Leader",
+    title: "Founder",
     img: people02,
   },
   {
