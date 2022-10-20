@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './style';
-import {SignIn, SignUp, Navbar } from './components';
+import {SignIn, SignUp, Navbar2 } from './components';
 
 
 const Signup = () => {
@@ -8,7 +8,7 @@ const Signup = () => {
         <div className="bg-primary text-white w-full overflow-hidden">
         <div className={`${styles.paddingX} ${styles.fexCenter}`}>
           <div className={`${styles.boxWidth}`}>
-            <Navbar/>
+            <Navbar2/>
           </div>
         </div>
         <SignIn/>

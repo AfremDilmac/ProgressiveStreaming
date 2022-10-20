@@ -29,8 +29,8 @@ const Home = () => {
         </div>
       </div>
       <CreateMeeting/>
-      <SignIn/>
-      <SignUp/>
+      {/* <SignIn/>
+      <SignUp/> */}
     </div>
     );
   }
