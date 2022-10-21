@@ -11,6 +11,7 @@ import CreateMeeting from "./CreateMeeting";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Navbar2 from "./Navbar2"
+import CurrentMeeting from "./CurrentMeeting";
 
 export {
   Navbar,
@@ -26,4 +27,5 @@ export {
   SignUp,
   SignIn,
   Navbar2,
+  CurrentMeeting,
 };
