@@ -95,6 +95,7 @@ const SignIn = () => {
                 </button>
             </div>
         </div>
+        
         <div className="absolute z-[2] -left-1/2 top-0 w-[52%] h-[100%] rounded-full white__gradient" />
          <div className="absolute z-[0] w-[35%] h-[50%] -right-[30%] rounded-full white__gradient bottom-40" />
 

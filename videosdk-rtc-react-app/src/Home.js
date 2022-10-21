@@ -28,9 +28,6 @@ const Home = () => {
           <Footer/>
         </div>
       </div>
-      <CreateMeeting/>
-      {/* <SignIn/>
-      <SignUp/> */}
     </div>
     );
   }
