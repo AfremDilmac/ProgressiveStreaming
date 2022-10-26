@@ -12,8 +12,6 @@ import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import Navbar2 from "./Navbar2"
 import CurrentMeeting from "./CurrentMeeting";
-import Room from "./Room";
-import Lobby from "./Lobby";
 
 export {
   Navbar,
@@ -30,6 +28,4 @@ export {
   SignIn,
   Navbar2,
   CurrentMeeting,
-  Room,
-  Lobby,
 };
