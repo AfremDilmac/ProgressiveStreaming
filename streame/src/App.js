@@ -1,11 +1,73 @@
-import dbRef, { userName } from "./server/firebase"
+import dbRef, { userName, connectedRef } from "./server/firebase"
+import { useEffect } from "react";
+import {connect} from "react-redux";
+import { 
+  setUser,
+  removeParticipant,
+  addParticipant,
+} from "./store/actioncreator";
 
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">{userName}</div>
-  );
+function App(props) {
+    const participantRef = dbRef.child("participants");
+    useEffect(() => {
+      connectedRef.on('value', (snap) => {
+        if(snap.val()) {
+          const defaultPreferences = {
+            audio: true,
+            video:false,
+            screen:false,
+          };
+          const userRef = participantRef.push({
+            userName,
+            preference: defaultPreferences,
+          });
+          props.setUser({
+            [userRef.key] : {
+              userName,
+              ...defaultPreferences,
+            },
+          })
+          userRef.onDisconnect().remove();
+        }
+      });
+    }, []);
+    useEffect(() => {
+      if (props.user) {
+        participantRef.on("child_added", (snap) => {
+          const {userName, preferences} = snap.val();
+          props.addParticipant({
+            [snap.key]: {
+              userName,
+              ...preferences,
+            },
+          });
+        });
+        participantRef.on("child_removed", (snap) => {
+          props.removeParticipant(snap.key);
+        });
+      }
+    }, [props.user])
+    return <div className="App">
+      Current user: {JSON.stringify(props.user)} <br/>
+      Participants: {JSON.stringify(props.participants)}
+      </div>;
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+  user: state.currentUser,
+  participants: state.participants,
+  };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (user) => dispatch(setUser(user)),
+    addParticipant: (participant) => dispatch(addParticipant(participant)),
+    removeParticipant: (participantKey) => dispatch(removeParticipant(participantKey)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (App);

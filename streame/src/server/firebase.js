@@ -1,5 +1,5 @@
-import firebase from "firebase/app";
-import database from "firebase/database";
+import firebase from "firebase/compat/app";
+import database from "firebase/compat/database";
 
 const firebaseConfig = {
     apiKey:'AIzaSyCWf86SuAbS5Rus76MC9vLPsgLnh0Y8jcI',
@@ -8,7 +8,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const dbRef = firebase.database().ref();
+let dbRef = firebase.database().ref();
+
+export let connectedRef = firebase.database().ref(".info/connected")
 
 export const userName = prompt("What's your name?");
 
