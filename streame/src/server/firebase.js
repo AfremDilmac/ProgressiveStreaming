@@ -6,22 +6,22 @@ const firebaseConfig = {
     databaseURL: 'https://streame-2e066-default-rtdb.europe-west1.firebasedatabase.app/'
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-let dbRef = firebase.database().ref();
+export const db = firebase;
 
-export let connectedRef = firebase.database().ref(".info/connected")
+var firepadRef = firebase.database().ref();
 
 export const userName = prompt("What's your name?");
-
-const urlParams = new URLSearchParams(window.location.search);
-const roomId = urlParams.get("id");
+const urlparams = new URLSearchParams(window.location.search);
+const roomId = urlparams.get("id");
 
 if (roomId) {
-    dbRef = dbRef.child(roomId);
+  firepadRef = firepadRef.child(roomId);
 } else {
-    dbRef = dbRef.push();
-    window.history.replaceState(null, "Meet", "?id="+dbRef.key);
+  firepadRef = firepadRef.push();
+  window.history.replaceState(null, "Meet", "?id=" + firepadRef.key);
 }
 
-export default dbRef;
+export default firepadRef;
