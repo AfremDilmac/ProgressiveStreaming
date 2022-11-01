@@ -12,7 +12,9 @@ import {
 import { connect } from "react-redux";
 
 function App(props) {
+  //Get user stream using Web API navigator mediadevies
   const getUserStream = async () => {
+    //Ask user to put audio and video on
     const localStream = await navigator.mediaDevices.getUserMedia({
       audio: true,
       video: true,
@@ -27,6 +29,7 @@ function App(props) {
 
     connectedRef.on("value", (snap) => {
       if (snap.val()) {
+        //Choose default preferences when user connects to stream
         const defaultPreference = {
           audio: true,
           video: false,
@@ -39,6 +42,7 @@ function App(props) {
         props.setUser({
           [userStatusRef.key]: { name: userName, ...defaultPreference },
         });
+        //When user closes browser remove from list
         userStatusRef.onDisconnect().remove();
       }
     });
@@ -100,5 +104,5 @@ const mapDispatchToProps = (dispatch) => {
     updateParticipant: (user) => dispatch(updateParticipant(user)),
   };
 };
-
+//Connect both using react redux
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -13,13 +13,19 @@ export const db = firebase;
 
 var firepadRef = firebase.database().ref();
 
+//Get user name exported in this variable
 export const userName = prompt("What's your name?");
+
 const urlparams = new URLSearchParams(window.location.search);
 const roomId = urlparams.get("id");
 
+//Check if room id is present or not
+//Update reference with the roomid
 if (roomId) {
   firepadRef = firepadRef.child(roomId);
-} else {
+} 
+//Create a new room and get the reference
+else {
   firepadRef = firepadRef.push();
   window.history.replaceState(null, "Meet", "?id=" + firepadRef.key);
 }
