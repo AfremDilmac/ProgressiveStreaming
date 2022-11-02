@@ -8,12 +8,14 @@ import { setMainStream, updateUser } from "../../store/actioncreator";
 const MainScreen = (props) => {
   const participantRef = useRef(props.participants);
 
+  // function MIC enable
   const onMicClick = (micEnabled) => {
     if (props.stream) {
       props.stream.getAudioTracks()[0].enabled = micEnabled;
       props.updateUser({ audio: micEnabled });
     }
   };
+  // fucntion video Enable
   const onVideoClick = (videoEnabled) => {
     if (props.stream) {
       props.stream.getVideoTracks()[0].enabled = videoEnabled;
