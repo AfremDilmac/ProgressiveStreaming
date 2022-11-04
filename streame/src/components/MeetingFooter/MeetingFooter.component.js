@@ -9,12 +9,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ReactTooltip from "react-tooltip";
 import "./MeetingFooter.css";
+
+//settings from buttons/icons
 const MeetingFooter = (props) => {
   const [streamState, setStreamState] = useState({
     mic: true,
     video: false,
     screen: false,
   });
+  //button click Mic
   const micClick = () => {
     setStreamState((currentState) => {
       return {
@@ -23,7 +26,7 @@ const MeetingFooter = (props) => {
       };
     });
   };
-
+//button click Video
   const onVideoClick = () => {
     setStreamState((currentState) => {
       return {
@@ -32,7 +35,7 @@ const MeetingFooter = (props) => {
       };
     });
   };
-
+//button click screenshare
   const onScreenClick = () => {
     props.onScreenClick(setScreenState);
   };
@@ -45,6 +48,8 @@ const MeetingFooter = (props) => {
       };
     });
   };
+
+  //status from buttons/icons 
   useEffect(() => {
     props.onMicClick(streamState.mic);
   }, [streamState.mic]);

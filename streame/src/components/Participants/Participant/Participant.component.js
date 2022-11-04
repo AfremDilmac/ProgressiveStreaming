@@ -4,6 +4,9 @@ import { faMicrophoneSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Participant.css";
 
+// participant how it is displayed on mainscreen 
+// with multiple participants 
+// with card component from shared
 export const Participant = (props) => {
   const {
     curentIndex,

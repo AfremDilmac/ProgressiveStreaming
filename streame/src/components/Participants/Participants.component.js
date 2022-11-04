@@ -3,6 +3,7 @@ import "./Participants.css";
 import { connect } from "react-redux";
 import { Participant } from "./Participant/Participant.component";
 
+// participant same meeting 
 const Participants = (props) => {
   const videoRef = useRef(null);
   let participantKey = Object.keys(props.participants);

@@ -8,12 +8,14 @@ import { setMainStream, updateUser } from "../../store/actioncreator";
 const MainScreen = (props) => {
   const participantRef = useRef(props.participants);
 
+  // Function Click MIC enable
   const onMicClick = (micEnabled) => {
     if (props.stream) {
       props.stream.getAudioTracks()[0].enabled = micEnabled;
       props.updateUser({ audio: micEnabled });
     }
   };
+   // Function video MIC enable
   const onVideoClick = (videoEnabled) => {
     if (props.stream) {
       props.stream.getVideoTracks()[0].enabled = videoEnabled;
@@ -37,6 +39,7 @@ const MainScreen = (props) => {
     props.setMainStream(stream);
   };
 
+   // Function Click screenshare 
   const onScreenShareEnd = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({
       audio: true,
