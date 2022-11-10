@@ -1,4 +1,5 @@
 import React from 'react'
+import Afrem from "../assets/people02.png"
 
 
 const ChatNavbar = () => {
@@ -6,9 +7,9 @@ const ChatNavbar = () => {
     <div className='navbar'>
       <span className="logo">streaMe</span>
       <div className="user">
-        <img src="" alt="" />
-        <span>john</span>
-        <button>test</button>
+        <img src={Afrem} alt="" />
+        <span>Afrem</span>
+        <button>logout</button>
       </div>
     </div>
   )
