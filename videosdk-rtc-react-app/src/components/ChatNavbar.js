@@ -1,15 +1,21 @@
-import React from 'react'
-import Afrem from "../assets/people02.png"
+import React, { useContext } from 'react'
+import {signOut} from "firebase/auth"
+import { auth } from './firebase'
+import { AuthContext } from '../context/AuthContext'
+import { useNavigate, Link } from "react-router-dom";
 
 
 const ChatNavbar = () => {
+  const {currentUser} = useContext(AuthContext)
+
   return (
     <div className='navbar'>
       <span className="logo">streaMe</span>
       <div className="user">
-        <img src={Afrem} alt="" />
-        <span>Afrem</span>
-        <button>logout</button>
+      <img src={currentUser.photoURL} alt="" />
+        <span>{currentUser.displayName}</span>
+        <button onClick={()=>signOut(auth)}>logout </button>
+        {/* <Link to="/app"></Link> */}
       </div>
     </div>
   )
