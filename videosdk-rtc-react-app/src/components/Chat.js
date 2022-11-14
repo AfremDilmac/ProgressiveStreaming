@@ -20,6 +20,7 @@ const Chat = () => {
       <Messages/>
       <Input/>
     </div>
+    
   )
 }
 
