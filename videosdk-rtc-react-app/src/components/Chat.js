@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Cam from "../assets/cam.png"
 import Add from "../assets/add.png"
 import More from "../assets/more.png"
@@ -12,7 +12,7 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="chatInfo">
-        //if there is a user display name
+        {/* //if there is a user display name */}
         <span>{data.user?.displayName}</span>
         <div className="chatIcons">
           <img src={Cam} alt =""></img>
