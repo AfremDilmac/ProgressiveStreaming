@@ -1,12 +1,10 @@
 import React from "react";
-import {BrowserRouter, Router, Route, Routes, Navigate} from 'react-router-dom';
+import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
 import ChatApp from "./ChatApp";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import GetStream from "./GetStream";
 import Home from './Home';
 // import Signup from './Signup';
-import StartStreaming from "./StartStreaming";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 

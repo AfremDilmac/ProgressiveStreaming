@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './style';
-import {Navbar, DownloadSoon, GetPremium, About, Promotion, Stats, Footer, Testimonials, Hero, CreateMeeting, SignIn, SignUp } from './components';
+import {Navbar, DownloadSoon, GetPremium, About, Promotion, Stats, Footer, Testimonials, Hero} from './components';
 
 const Home = () => {
     return (

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Add from "../assets/addAvatar.png"
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
@@ -15,26 +14,26 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/")
+      navigate("/app")
     } catch (err) {
       setErr(true);
     }
   };
   return (
     <div className="formContainer">
-        <div className="formWrapper">
-            <span className="logo">StreaME</span>
-            <span className="title">Login</span>
-            <form onSubmit={handleSubmit}>
-                <input type="email" placeholder="email"></input>
-                <input type="password" placeholder="password"></input>
-                <button>Sign in <Link to="/app"></Link> </button>
-                {err && <span>Something went wrong</span>}
-            </form>
-            <p>You don't have an account? <Link to="/register">Register</Link></p>
-        </div>
+      <div className="formWrapper">
+        <span className="logo">StreaME</span>
+        <span className="title">Login</span>
+        <form onSubmit={handleSubmit}>
+          <input type="email" placeholder="email" />
+          <input type="password" placeholder="password" />
+          <button>Sign in</button>
+          {err && <span>Something went wrong</span>}
+        </form>
+        <p>You don't have an account? <Link to="/register">Register</Link></p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

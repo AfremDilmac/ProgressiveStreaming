@@ -14,31 +14,32 @@ import {db} from "../components/firebase";
 import {AuthContext} from "../context/AuthContext"
 
 const Search = () => {
+  const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
+  const [err, setErr] = useState(false);
 
-  const [username, setUsername] = useState("")
-  const [user, setUser] = useState(null)
-  const [err, setErr] = useState(false)
+  const { currentUser } = useContext(AuthContext);
 
-  const {currentUser} = useContext(AuthContext)
+  const handleSearch = async () => {
+    const q = query(
+      collection(db, "users"),
+      where("displayName", "==", username)
+    );
 
-  const handleSearch = async ()=>{
-    const q = query(collection(db, "users"),where("displayName", "==", username))
-
-    try{
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-     setUser(doc.data())
-    });
-    }catch(err){
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        setUser(doc.data());
+      });
+    } catch (err) {
       setErr(true);
     }
-  }
+  };
 
-  const handleKey = e=>{
+  const handleKey = (e) => {
     e.code === "Enter" && handleSearch();
-  }
+  };
 
-  //https://firebase.google.com/docs/firestore/manage-data/add-data
   const handleSelect = async () => {
     //check whether the group(chats in firestore) exists, if not create
     const combinedId =
@@ -72,32 +73,32 @@ const Search = () => {
         });
       }
     } catch (err) {}
-    setUser(null)
-    setUsername("")
-  }
 
+    setUser(null);
+    setUsername("")
+  };
   return (
     <div className="search">
-    <div className="searchForm">
-      <input
-        type="text"
-        placeholder="Find a user"
-        onKeyDown={handleKey}
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-      />
-    </div>
-    {err && <span>User not found!</span>}
-    {user && (
-      <div className="userChat" onClick={handleSelect}>
-        <img src={user.photoURL} alt="" />
-        <div className="userChatInfo">
-          <span>{user.displayName}</span>
-        </div>
+      <div className="searchForm">
+        <input
+          type="text"
+          placeholder="Find a user"
+          onKeyDown={handleKey}
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
+        />
       </div>
-    )}
-  </div>
-  )
-}
+      {err && <span>User not found!</span>}
+      {user && (
+        <div className="userChat" onClick={handleSelect}>
+          <img src={user.photoURL} alt="" />
+          <div className="userChatInfo">
+            <span>{user.displayName}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default Search
+export default Search;

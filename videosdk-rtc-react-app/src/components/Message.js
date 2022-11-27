@@ -3,10 +3,9 @@ import { AuthContext } from '../context/AuthContext'
 import { ChatContext } from '../context/ChatContext'
 
 
-const Message = ({message}) => {
-
-  const {currentUser} = useContext(AuthContext)
-  const {data} = useContext(ChatContext)
+const Message = ({ message }) => {
+  const { currentUser } = useContext(AuthContext);
+  const { data } = useContext(ChatContext);
 
   const ref = useRef();
 
@@ -20,7 +19,6 @@ const Message = ({message}) => {
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
     >
       <div className="messageInfo">
-        {/* //if message id our id show our img if not use the other user image */}
         <img
           src={
             message.senderId === currentUser.uid
