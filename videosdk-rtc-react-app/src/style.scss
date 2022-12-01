@@ -58,7 +58,7 @@
         }
   
         button {
-          background-color: #7b96ec;
+          background-color: #e3a83a;
           color: white;
           padding: 10px;
           font-weight: bold;
@@ -88,15 +88,15 @@
   }
   
   .home {
-    background-color: #a7bcff;
+    background-color: #c6c3c3;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
   
     .container {
-      border: 1px solid white;
-      border-radius: 10px;
+      border: 1px solid #151322;
+      border-radius: 5px;
       width: 65%;
       height: 80%;
       display: flex;
@@ -107,17 +107,18 @@
   
       .sidebar {
         flex: 1;
-        background-color: #3e3c61;
+        background-color: #ffffff;
         position: relative;
+        border-right: 1px solid black;
   
         .navbar {
           display: flex;
           align-items: center;
-          background-color: #2f2d52;
+          background-color: #e3a83a;
           height: 50px;
           padding: 10px;
           justify-content: space-between;
-          color: #ddddf7;
+          color: #ffffff;
   
           .logo {
             font-weight: bold;
@@ -139,9 +140,10 @@
             }
   
             button {
-              background-color: #5d5b8d;
-              color: #ddddf7;
-              font-size: 10px;
+              background-color: #e3a83a;
+              color: #fff;
+              font-size: 12px;
+              font-weight: bold;
               border: none;
               cursor: pointer;
               @include tablet {
@@ -153,6 +155,8 @@
         }
         .search {
           border-bottom: 1px solid gray;
+          border-radius: 3px;
+          background-color: white;
   
           .searchForm {
             padding: 10px;
@@ -160,11 +164,11 @@
             input {
               background-color: transparent;
               border: none;
-              color: white;
+              color: #e3a83a;
               outline: none;
   
               &::placeholder {
-                color: lightgray;
+                color: #e3a83a;
               }
             }
           }
@@ -177,9 +181,10 @@
           gap: 10px;
           color: white;
           cursor: pointer;
+          
   
           &:hover {
-            background-color: #2f2d52;
+            background-color: #919191;
           }
   
           img {
@@ -190,13 +195,15 @@
           }
   
           .userChatInfo {
+            
             span {
+              color: #e3a83a;
               font-size: 18px;
-              font-weight: 500;
+              font-weight: bold;
             }
             p {
               font-size: 14px;
-              color: lightgray;
+              color: rgb(0, 0, 0);
             }
           }
         }
@@ -206,7 +213,7 @@
   
         .chatInfo {
           height: 50px;
-          background-color: #5d5b8d;
+          background-color: #e3a83a;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -225,7 +232,7 @@
         }
   
         .messages {
-          background-color: #ddddf7;
+          background-color: #f5f5f5;
           padding: 10px;
           height: calc(100% - 99px);
           overflow: scroll;
@@ -255,7 +262,7 @@
               gap: 10px;
   
               p {
-                background-color: white;
+                background-color: #e3a83a;
                 padding: 10px 20px;
                 border-radius: 0px 10px 10px 10px;
                 max-width: max-content;
@@ -272,7 +279,7 @@
               .messageContent {
                 align-items: flex-end;
                 p {
-                  background-color: #8da4f1;
+                  background-color: #e3a83a;
                   color: white;
                   border-radius: 10px 0px 10px 10px;
                 }
@@ -293,11 +300,12 @@
             width: 100%;
             border: none;
             outline: none;
-            color: #2f2d52;
+            color: #e3a83a;
+            font-weight: bold;
             font-size: 18px;
   
             &::placeholder {
-              color: lightgray;
+              color: #e3a83a;
             }
           }
   
@@ -315,7 +323,7 @@
               border: none;
               padding: 10px 15px;
               color: white;
-              background-color: #8da4f1;
+              background-color: #e3a83a;
               cursor: pointer;
             }
           }
