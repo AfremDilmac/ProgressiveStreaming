@@ -103,6 +103,7 @@
       overflow: hidden;
       @include tablet {
        width: 90%;
+       display: block;
       }
   
       .sidebar {
@@ -209,7 +210,11 @@
         }
       }
       .chat {
+
         flex: 2;
+        @include tablet {
+          height: 80%;
+         }
   
         .chatInfo {
           height: 50px;
