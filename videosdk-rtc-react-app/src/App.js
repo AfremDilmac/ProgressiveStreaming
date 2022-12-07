@@ -8,6 +8,7 @@ import Home from './Home';
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 import Adminpanel from "./components/AdminPanel"
+import Profile from "./components/Profile"
 
 import "./style.scss"
 
@@ -58,6 +59,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="admin" element={<Adminpanel />} />
+        <Route path="myprofile" element={<Profile />} />
 
       </Route>
     </Routes>
