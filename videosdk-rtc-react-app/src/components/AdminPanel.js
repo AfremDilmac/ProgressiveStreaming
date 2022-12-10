@@ -1,9 +1,6 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import Add from "../assets/addAvatar.png"
-import { useState, useEffect } from "react";
-import { auth, db, storage} from "./firebase";
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc} from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useState, useEffect, useMemo } from "react";
+import {  db} from "./firebase";
+import { collection, getDocs, deleteDoc, doc} from "firebase/firestore";
 
 function App() {
   const [newName, setNewName] = useState("");
@@ -16,61 +13,66 @@ function App() {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
+
 //Create user 
-  const handleSubmit = async (e) => {
-    setLoading(true);
-    e.preventDefault();
-    const displayName = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
-    const file = e.target[3].files[0];
-
-    try {
-      //Create user
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-
-      //Create a unique image name
-      const date = new Date().getTime();
-      const storageRef = ref(storage, `${displayName + date}`);
-
-      await uploadBytesResumable(storageRef, file).then(() => {
-        getDownloadURL(storageRef).then(async (downloadURL) => {
-          try {
-            //Update profile
-            await updateProfile(res.user, {
-              displayName,
-              photoURL: downloadURL,
-            });
-            //create user on firestore
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              displayName,
-              email,
-              photoURL: downloadURL,
-            });
-
-            //create empty user chats on firestore
-            await setDoc(doc(db, "userChats", res.user.uid), {});
-          } catch (err) {
-            console.log(err);
-            setErr(true);
-            setLoading(false);
-          }
-        });
-      });
-    } catch (err) {
-      setErr(true);
-      setLoading(false);
-    }
-  };
+    // const handleSubmit = async (e) => {
+    //   setLoading(true);
+    //   e.preventDefault();
+      // const displayName = "default";
+      // const email = e.target[1].value;
+      // const password = e.target[2].value;
+      // const file = e.target[3].files[0];
+  
+    //   try {
+    //     //Create user
+    //     const res = await createUserWithEmailAndPassword(auth, email, password);
+  
+    //     //Create a unique image name
+    //     const date = new Date().getTime();
+    //     const storageRef = ref(storage, `${displayName + date}`);
+  
+    //     await uploadBytesResumable(storageRef, file).then(() => {
+    //       getDownloadURL(storageRef).then(async (downloadURL) => {
+    //         try {
+    //           //Update profile
+    //           await updateProfile(res.user, {
+    //             displayName,
+    //             photoURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+    //           });
+    //           //create user on firestore
+    //           await setDoc(doc(db, "users", res.user.uid), {
+    //             uid: res.user.uid,
+    //             displayName,
+    //             email,
+    //             photoURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+    //           });
+  
+    //           //create empty user chats on firestore
+    //           await setDoc(doc(db, "userChats", res.user.uid), {});
+    //         } catch (err) {
+    //           console.log(err);
+    //           setErr(true);
+    //           setLoading(false);
+    //         }
+    //       });
+    //     });
+    //   } catch (err) {
+    //     setErr(true);
+    //     setLoading(false);
+    //   }
+    // };
     
 
   //update user in firestore
-  const updateUser = async (id, age) => {
-    const userDoc = doc(db, "users", id);
-    const newFields = { age: age + 1 };
-    await updateDoc(userDoc, newFields);
-  };
+  // const updateUser = async (id, email) => {
+  //   const userDoc = doc(db, "users", id);
+  //   const newFields = { email};
+  //   await updateDoc(userDoc, newFields);
+  // };
 
   //delete user in firestore
   const deleteUser = async (id) => {
@@ -83,69 +85,63 @@ function App() {
       const data = await getDocs(usersCollectionRef);
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-
     getUsers();
   }, []);
 
 
 
   return (
-    <div className="App">
+    //create van user UID
+    <div className="App" >
         {/* input displayName */}
-    <form onSubmit={handleSubmit}>
-        <input
-        placeholder="display name..."
-        onChange={(event) => {
-          setNewName(event.target.value);
-        }}
-      />
+    {/* <form onSubmit={handleSubmit}> */}
+    
       {/* input email */}
-      <input
+      {/* <input
         placeholder="email..."
         onChange={(event) => {
             setNewAge(event.target.value);
         }}
-      />
+      /> */}
       {/* input password */}
-       <input
+       {/* <input
         placeholder="password..."
         onChange={(event) => {
             setNewAge(event.target.value);
         }}
-      />
+      /> */}
       {/* button create user */}
-     <button disabled={loading}>Create User</button>
-        {/* input avatar  */}
-       <input required style={{ display: "none" }} type="file" id="file" />
-          <label htmlFor="file">
-            <img src={Add} alt="" />
-          </label>
-
-          {/* Loading after pressing "Create user" */}
-          {loading && "Uploading and compressing the image please wait..."}
-          {err && <span>Something went wrong</span>}
-
-    </form>
-     
+      {/* <input required style={{ display: "none" }} type="file" id="file" />
+     <button >Create User</button>
+    </form> */}
+    
      {/* //Button click Create user in firestore */}
+
+
+    <div class="">
+    <div class="grid grid-cols-4 gap-2 " >
+     <h1>DisplayName</h1>
+            <h1>Email</h1>
+            <h1>Avatar</h1>
+     </div>
+   
       {users.map((user) => {
         return (
-          <div>
+          
+          <div class="grid grid-cols-4 gap-2 " >
             {" "}
-         
-            <h1>DisplayName: {user.displayName}</h1>
-            <h1>Email: {user.email}</h1>
-            <h1>Avatar: {user.photoURL}</h1>
+            <h1>{user.displayName}</h1>
+            <h1>{user.email}</h1>
+            <h1>{user.photoURL}</h1>
            
             {/* //Button click update user in firestore */}
-            <button
+            {/* <button
               onClick={() => {
-                updateUser(user.displayName, user.email, user.photoURL);
+                updateUser(user.email)
               }}
             >
-             {" "}
               Update User 
-            </button>
+            </button> */}
 
 
             {/* //Button click delete user in firestore */}
@@ -154,12 +150,12 @@ function App() {
                 deleteUser(user.id);
               }}
             >
-              {" "}
               Delete User
             </button>
           </div>
         );
       })}
+    </div>
     </div>
   );
 }
