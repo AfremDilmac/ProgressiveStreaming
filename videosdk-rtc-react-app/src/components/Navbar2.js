@@ -1,4 +1,6 @@
 import {Link} from 'react-router-dom';
+import { auth} from "./firebase";
+import {signOut} from "firebase/auth"
 function Navbar2() {
     return (
         <>
@@ -10,7 +12,9 @@ function Navbar2() {
         </a>
         </Link>
         <div class="flex items-center">
-            <a href="#" class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">Logout</a>
+        <Link to={'/'}>
+        <button className="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={()=>signOut(auth)}>Logout</button>
+      </Link>
         </div>
     </div>
 </nav>

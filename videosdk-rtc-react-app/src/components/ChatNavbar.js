@@ -11,8 +11,10 @@ const ChatNavbar = () => {
     <div className='navbar'>
       <span className="logo">streaMe</span>
       <div className="user">
+      <Link to={'/myprofile'}>
       <img src={currentUser.photoURL} alt="" />
         <span>{currentUser.displayName}</span>
+        </Link>
       <Link to={'/'}>
         <button onClick={()=>signOut(auth)}>logout</button>
       </Link>
