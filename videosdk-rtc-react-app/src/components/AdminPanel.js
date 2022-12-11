@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import {  db} from "./firebase";
-import { collection, getDocs, deleteDoc, doc} from "firebase/firestore";
+import { collection, getDocs, deleteDoc, updateDoc, doc} from "firebase/firestore";
 
 function App() {
   const [newName, setNewName] = useState("");
@@ -18,61 +18,12 @@ function App() {
   }
 
 
-//Create user 
-    // const handleSubmit = async (e) => {
-    //   setLoading(true);
-    //   e.preventDefault();
-      // const displayName = "default";
-      // const email = e.target[1].value;
-      // const password = e.target[2].value;
-      // const file = e.target[3].files[0];
-  
-    //   try {
-    //     //Create user
-    //     const res = await createUserWithEmailAndPassword(auth, email, password);
-  
-    //     //Create a unique image name
-    //     const date = new Date().getTime();
-    //     const storageRef = ref(storage, `${displayName + date}`);
-  
-    //     await uploadBytesResumable(storageRef, file).then(() => {
-    //       getDownloadURL(storageRef).then(async (downloadURL) => {
-    //         try {
-    //           //Update profile
-    //           await updateProfile(res.user, {
-    //             displayName,
-    //             photoURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
-    //           });
-    //           //create user on firestore
-    //           await setDoc(doc(db, "users", res.user.uid), {
-    //             uid: res.user.uid,
-    //             displayName,
-    //             email,
-    //             photoURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
-    //           });
-  
-    //           //create empty user chats on firestore
-    //           await setDoc(doc(db, "userChats", res.user.uid), {});
-    //         } catch (err) {
-    //           console.log(err);
-    //           setErr(true);
-    //           setLoading(false);
-    //         }
-    //       });
-    //     });
-    //   } catch (err) {
-    //     setErr(true);
-    //     setLoading(false);
-    //   }
-    // };
-    
-
-  //update user in firestore
-  // const updateUser = async (id, email) => {
-  //   const userDoc = doc(db, "users", id);
-  //   const newFields = { email};
-  //   await updateDoc(userDoc, newFields);
-  // };
+  // update user in firestore
+  const updateUser = async (id, role) => {
+    const userDoc = doc(db, "users", id);
+    const newFields = { role};
+    await updateDoc(userDoc, newFields);
+  };
 
   //delete user in firestore
   const deleteUser = async (id) => {
@@ -88,75 +39,50 @@ function App() {
     getUsers();
   }, []);
 
-
-
   return (
-    //create van user UID
-    <div className="App" >
-        {/* input displayName */}
-    {/* <form onSubmit={handleSubmit}> */}
-    
-      {/* input email */}
-      {/* <input
-        placeholder="email..."
-        onChange={(event) => {
-            setNewAge(event.target.value);
-        }}
-      /> */}
-      {/* input password */}
-       {/* <input
-        placeholder="password..."
-        onChange={(event) => {
-            setNewAge(event.target.value);
-        }}
-      /> */}
-      {/* button create user */}
-      {/* <input required style={{ display: "none" }} type="file" id="file" />
-     <button >Create User</button>
-    </form> */}
-    
-     {/* //Button click Create user in firestore */}
 
-
-    <div class="">
-    <div class="grid grid-cols-4 gap-2 " >
-     <h1>DisplayName</h1>
-            <h1>Email</h1>
-            <h1>Avatar</h1>
-     </div>
-   
+    <div classNameName="App" >
+    <div className="p-4 flex">
+        <h1 className="text-3xl">
+            Users
+        </h1>
+    </div>
       {users.map((user) => {
         return (
           
-          <div class="grid grid-cols-4 gap-2 " >
-            {" "}
-            <h1>{user.displayName}</h1>
-            <h1>{user.email}</h1>
-            <h1>{user.photoURL}</h1>
-           
-            {/* //Button click update user in firestore */}
-            {/* <button
-              onClick={() => {
-                updateUser(user.email)
-              }}
-            >
-              Update User 
-            </button> */}
-
-
-            {/* //Button click delete user in firestore */}
-            <button
-              onClick={() => {
-                deleteUser(user.id);
-              }}
-            >
-              Delete User
-            </button>
-          </div>
+          <div className="text-gray-900 bg-gray-200">
+  
+    <div className="px-3 py-4 flex ">
+        <table className=" table-fixed w-full text-md bg-white shadow-md rounded mb-1 ">
+            <tbody>
+                <tr className="border-b">
+                    <th className="text-left p-3 px-5 ">Name</th>
+                    <th className="text-left p-3 px-5 ">Email</th>
+                    <th className="text-left p-3 px-5 ">Role</th>
+                    
+                </tr>
+                <tr className="border-b hover:bg-orange-100 bg-gray-100">
+                    <td className="p-2 px-4 ">{user.displayName}</td>
+                    <td className="p-2 px-4 ">{user.email}</td>
+                    <td className="p-2 px-4 ">
+                        <select value="user.role" className="bg-transparent">
+                            <option value="user">user</option>
+                            <option value="admin">admin</option>
+                        </select>
+                    </td>
+                    <td className="p-3 px-5 flex justify-end">
+                      <button type="button" className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
+                      <button type="button" onClick={() => {deleteUser(user.id); }}className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
         );
       })}
     </div>
-    </div>
+    
   );
 }
 
