@@ -41,10 +41,13 @@ const Register = () => {
               displayName,
               email,
               photoURL: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png",
+              role: "user"
             });
 
             //create empty user chats on firestore
-            await setDoc(doc(db, "userChats", res.user.uid), {});
+            await setDoc(doc(db, "userChats", res.user.uid), {
+              uid: res.user.uid,
+            });
             navigate("/myprofile");
           } catch (err) {
             console.log(err);

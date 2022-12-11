@@ -3,20 +3,15 @@ import {  db} from "./firebase";
 import { collection, getDocs, deleteDoc, updateDoc, doc} from "firebase/firestore";
 
 function App() {
-  const [newName, setNewName] = useState("");
-  const [newEmail, setNewAge] = useState("");
 
   const [users, setUsers] = useState([]);
   //collectie van users 
   const usersCollectionRef = collection(db, "users");
 
-  const [err, setErr] = useState(false);
-  const [loading, setLoading] = useState(false);
   
-  function refreshPage() {
-    window.location.reload(false);
-  }
-
+  // function refreshPage() {
+  //   window.location.reload(false);
+  // }
 
   // update user in firestore
   const updateUser = async (id, role) => {
@@ -26,9 +21,10 @@ function App() {
   };
 
   //delete user in firestore
-  const deleteUser = async (id) => {
-    const userDoc = doc(db, "users", id);
-    await deleteDoc(userDoc);
+  const deleteUser = async (uid) => {
+    const userDoc = doc(db, "users", uid);
+    const userChats = doc(db, "userChats", uid);
+    await deleteDoc(userDoc, userChats );
   };
 
   useEffect(() => {
