@@ -6,10 +6,6 @@ import ProfileCard from "./ProfileCard";
 function Profile() {
 
     const { currentUser } = useContext(AuthContext);
-    console.log(currentUser.displayName);
-    console.log(currentUser.email);
-    console.log(currentUser.photoURL);
-  
     return (
         <>
         <Navbar2/>

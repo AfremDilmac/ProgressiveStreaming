@@ -1,16 +1,35 @@
+import { ref } from "firebase/storage";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { upload } from "./firebase";
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
 
 function ProfileCard() {
-
+    let inpName = document.getElementById("username");
+    
     const { currentUser } = useContext(AuthContext);
     const [photo, setPhoto] = useState(null);
     const [loading, setLoading] = useState(false);
     const [photoUrl, setPhotoURL] = useState("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png");
-    console.log(currentUser.displayName);
-    console.log(currentUser.email);
-    console.log(currentUser.photoURL);
+    
+    const db = getFirestore();
+    let test = currentUser.uid
+    const docRef = doc(db, "users", `${test}`);
+
+    const data = {
+      displayName: inpName.value
+    }
+    console.log(currentUser.displayName)
+
+    function update(){
+    updateDoc(docRef, data)
+    .then(docRef => {
+        console.log("Value of an Existing Document Field has been updated");
+    })
+    .catch(error => {
+        console.log(error);
+    })
+  }
 
     function handleChange(e) {
       if(e.target.files[0]){
@@ -21,13 +40,14 @@ function ProfileCard() {
     function handleClick() {
       upload(photo, currentUser, setLoading);
     }
+  
 
     useEffect(() => {
       if (currentUser && currentUser.photoURL) {
         setPhotoURL(currentUser.photoURL);
       }
     }, [currentUser])
-  
+
     return (
         <>
           <div className="h-full">
@@ -52,14 +72,14 @@ function ProfileCard() {
        <div className="pb-6">
          <label for="name" className="font-semibold text-gray-700 block pb-1">{currentUser.displayName}</label>
          <div className="flex">
-           <input disabled id="username" className="border-1  rounded-r px-4 py-2 w-full" type="text" value={currentUser.displayName} />
+           <input id="username" className="border-1 rounded-r px-4 py-2 w-full" type="text" placeholder={currentUser.displayName}  />
          </div>
        </div>
        <div className="pb-4">
          <label for="about" className="font-semibold text-gray-700 block pb-1">{currentUser.email}</label>
          <input disabled id="email" className="border-1  rounded-r px-4 py-2 w-full" type="email" value={currentUser.email}/>
          <span className=" mb-6 text-gray-600 pt-4 block opacity-70">Personal login information of your account</span>
-         <button className="-mb-4 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800" >Update</button>
+         <button className="-mb-4 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800" onClick={update}>Update</button>
        </div>
      </div>
    </div>
@@ -73,6 +93,17 @@ function ProfileCard() {
         <option value="TWO">People following the same courses as you</option>
         <option value="THREE">People who u send first a message to</option>
         </select>
+        <br/>
+        <label for="messages" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose your studies</label>
+        <select id="studies" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option selected>IT</option>
+        <option value="TWO">Management</option>
+        <option value="THREE">Marketing</option>
+        <option value="FOUR">Art</option>
+        <option value="FIVE">Medic</option>
+        <option value="SIX">Psychology</option>
+        </select>
+        <br/>
      
         <label for="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose your gender</label>
         <div className="flex items-center">
@@ -87,6 +118,7 @@ function ProfileCard() {
     <input id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     <label for="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
 </div>
+<button className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Update</button>
      </div>
    </div>
         </>
