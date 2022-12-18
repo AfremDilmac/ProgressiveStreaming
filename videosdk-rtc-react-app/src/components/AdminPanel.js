@@ -9,9 +9,9 @@ function App() {
   const usersCollectionRef = collection(db, "users");
 
   
-function refreshPage() {
-     window.location.reload(false);
- }
+// function refreshPage() {
+//      window.location.reload(false);
+//  }
 // const selectedRolekies = document.getElementById("listRole");
 
 // selectedRolekies.option[selectedRolekies.selectedIndex].text
