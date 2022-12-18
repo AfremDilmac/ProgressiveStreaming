@@ -9,14 +9,23 @@ function App() {
   const usersCollectionRef = collection(db, "users");
 
   
-  // function refreshPage() {
-  //   window.location.reload(false);
-  // }
+function refreshPage() {
+     window.location.reload(false);
+ }
+// const selectedRolekies = document.getElementById("listRole");
+
+// selectedRolekies.option[selectedRolekies.selectedIndex].text
 
   // update user in firestore
-  const updateUser = async (id, role) => {
+  const updateUserRole = async (id, role) => {
     const userDoc = doc(db, "users", id);
-    const newFields = { role};
+    const newFields = { role: "admin"};
+    await updateDoc(userDoc, newFields);
+  };
+
+  const updateUserRole2 = async (id, role) => {
+    const userDoc = doc(db, "users", id);
+    const newFields = { role: "user"};
     await updateDoc(userDoc, newFields);
   };
 
@@ -58,17 +67,19 @@ function App() {
                     
                 </tr>
                 <tr className="border-b hover:bg-orange-100 bg-gray-100">
-                    <td className="p-2 px-4 ">{user.displayName}</td>
-                    <td className="p-2 px-4 ">{user.email}</td>
-                    <td className="p-2 px-4 ">
-                        <select value="user.role" className="bg-transparent">
-                            <option value="user">user</option>
-                            <option value="admin">admin</option>
-                        </select>
+                    <td className="p-3 px-5 ">{user.displayName}</td>
+                    <td className="p-3 px-5 ">{user.email}</td>
+                    <td className="p-3 px-5 ">{user.role}
+                        {/* <select value="user.role" className="bg-transparent" id="listRole">
+                            <option id="RoleUser" value="user">user</option>
+                            <option id="RoleAdmin" value="admin">admin</option>
+                        </select> */}
                     </td>
                     <td className="p-3 px-5 flex justify-end">
-                      <button type="button" className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Save</button>
-                      <button type="button" onClick={() => {deleteUser(user.id); }}className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                      <button type="button"  onClick={() => {updateUserRole(user.id);}} className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Admin </button>
+                      <button type="button"  onClick={() => {updateUserRole2(user.id);}} className="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">User </button>
+                      <button type="button" onClick={() => {deleteUser(user.id); }} className="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                      
                     </td>
                 </tr>
             </tbody>
