@@ -11,6 +11,7 @@ import Adminpanel from "./components/AdminPanel"
 import Profile from "./components/Profile"
 
 import "./style.scss"
+import ForgotPassword from "./components/ForgotPassword";
 
 function App() {
 
@@ -60,6 +61,7 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="admin" element={<Adminpanel />} />
         <Route path="myprofile" element={<Profile />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
 
       </Route>
     </Routes>
