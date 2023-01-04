@@ -1,4 +1,6 @@
 import { ref } from "firebase/storage";
+import {  db} from "./firebase";
+import { deleteDoc} from "firebase/firestore";
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { upload } from "./firebase";
@@ -11,7 +13,15 @@ function ProfileCard() {
     const [photo, setPhoto] = useState(null);
     const [loading, setLoading] = useState(false);
     const [photoUrl, setPhotoURL] = useState("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png");
-    
+
+    //delete user in firestore
+     const deleteUser = async (uid) => {
+      const userDoc = doc(db, "users", uid);
+      const userChats = doc(db, "userChats", uid);
+      await deleteDoc(userDoc, userChats );
+      };
+
+
     const db = getFirestore();
     let test = currentUser.uid
     const docRef = doc(db, "users", `${test}`);
@@ -47,6 +57,7 @@ function ProfileCard() {
         setPhotoURL(currentUser.photoURL);
       }
     }, [currentUser])
+
 
     return (
         <>
@@ -121,8 +132,12 @@ function ProfileCard() {
 <button className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Update</button>
      </div>
    </div>
+   <div>
+   <button onClick={() => {deleteUser(currentUser.user.id); }} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Profile</button>
+   </div>
         </>
     );
 }
+
   
   export default ProfileCard;
