@@ -1,9 +1,10 @@
 import { ref } from "firebase/storage";
 import {  db} from "./firebase";
+import {Link} from 'react-router-dom';
 import { deleteDoc} from "firebase/firestore";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect,  } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { upload } from "./firebase";
+import {  upload } from "./firebase";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 
 function ProfileCard() {
@@ -57,7 +58,6 @@ function ProfileCard() {
         setPhotoURL(currentUser.photoURL);
       }
     }, [currentUser])
-
 
     return (
         <>
@@ -132,12 +132,11 @@ function ProfileCard() {
 <button className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Update</button>
      </div>
    </div>
+   <Link to={'/login'}>
    <div>
-   <button onClick={() => {deleteUser(currentUser.user.id); }} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Profile</button>
+   <button onClick={() => {deleteUser(test);}} class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Profile</button>
    </div>
+   </Link>
         </>
-    );
-}
-
-  
+            );}
   export default ProfileCard;
