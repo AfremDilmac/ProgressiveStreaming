@@ -1,108 +1,40 @@
-import MainScreen from "./components/MainScreen/MainScreen.component";
-import firepadRef, { db, userName } from "./server/firebase";
-import "./App.css";
-import { useEffect } from "react";
-import {
-  setMainStream,
-  addParticipant,
-  setUser,
-  removeParticipant,
-  updateParticipant,
-} from "./store/actioncreator";
-import { connect } from "react-redux";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import "./style.scss";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 
-function App(props) {
-  //Get user stream using Web API navigator mediadevies
-  const getUserStream = async () => {
-    //Ask user to put audio and video on
-    const localStream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: true,
-    });
+function App() {
+  const { currentUser } = useContext(AuthContext);
 
-    return localStream;
-  };
-  useEffect(async () => {
-    const stream = await getUserStream();
-    stream.getVideoTracks()[0].enabled = false;
-    props.setMainStream(stream);
-
-    connectedRef.on("value", (snap) => {
-      if (snap.val()) {
-        //Choose default preferences when user connects to stream
-        const defaultPreference = {
-          audio: true,
-          video: false,
-          screen: false,
-        };
-        const userStatusRef = participantRef.push({
-          userName,
-          preferences: defaultPreference,
-        });
-        props.setUser({
-          [userStatusRef.key]: { name: userName, ...defaultPreference },
-        });
-        //When user closes browser remove from list
-        userStatusRef.onDisconnect().remove();
-      }
-    });
-  }, []);
-
-  const connectedRef = db.database().ref(".info/connected");
-  const participantRef = firepadRef.child("participants");
-
-  const isUserSet = !!props.user;
-  const isStreamSet = !!props.stream;
-
-  useEffect(() => {
-    if (isStreamSet && isUserSet) {
-      participantRef.on("child_added", (snap) => {
-        const preferenceUpdateEvent = participantRef
-          .child(snap.key)
-          .child("preferences");
-        preferenceUpdateEvent.on("child_changed", (preferenceSnap) => {
-          props.updateParticipant({
-            [snap.key]: {
-              [preferenceSnap.key]: preferenceSnap.val(),
-            },
-          });
-        });
-        const { userName: name, preferences = {} } = snap.val();
-        props.addParticipant({
-          [snap.key]: {
-            name,
-            ...preferences,
-          },
-        });
-      });
-      participantRef.on("child_removed", (snap) => {
-        props.removeParticipant(snap.key);
-      });
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
     }
-  }, [isStreamSet, isUserSet]);
+
+    return children
+  };
 
   return (
-    <div className="App">
-      <MainScreen />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    stream: state.mainStream,
-    user: state.currentUser,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setMainStream: (stream) => dispatch(setMainStream(stream)),
-    addParticipant: (user) => dispatch(addParticipant(user)),
-    setUser: (user) => dispatch(setUser(user)),
-    removeParticipant: (userId) => dispatch(removeParticipant(userId)),
-    updateParticipant: (user) => dispatch(updateParticipant(user)),
-  };
-};
-//Connect both using react redux
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
