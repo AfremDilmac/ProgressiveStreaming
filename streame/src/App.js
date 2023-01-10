@@ -5,6 +5,8 @@ import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
+import AdminPanel from "./components/admin/AdminPanel";
+
 
 function App() {
 
@@ -15,6 +17,7 @@ function App() {
           <Route path="/chatapp" element={< ChatApp/>} />
           <Route path="profile" element={<Profile />} />
           <Route path="login" element={<Login />} />
+          <Route path="admin" element={<AdminPanel />} />
           <Route path="register" element={<Register />} />
       </Routes>
     </BrowserRouter>
