@@ -15,13 +15,7 @@ function ProfileCard() {
     const [loading, setLoading] = useState(false);
     const [photoUrl, setPhotoURL] = useState("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png");
 
-    //delete user in firestore
-     const deleteUser = async (uid) => {
-      const userDoc = doc(db, "users", uid);
-      const userChats = doc(db, "userChats", uid);
-      await deleteDoc(userDoc, userChats );
-      };
-
+  
 
     const db = getFirestore();
     let test = currentUser.uid
@@ -58,6 +52,40 @@ function ProfileCard() {
         setPhotoURL(currentUser.photoURL);
       }
     }, [currentUser])
+
+  //delete user in firestore
+  const deleteUser = async (uid) => {
+    const userDoc = doc(db, "users", uid);
+    const userChats = doc(db, "userChats", uid);
+    await deleteDoc(userDoc, userChats );
+    };
+
+    // DisplayName update
+    const updateUserDisplayName = async (uid, displayname) => {
+      const userDoc = doc(db, "users", uid);
+      const newFields = { DisplayName: selectStudie.value};
+      await updateDoc(userDoc, newFields);
+    };
+    // studie update
+    const updateUserStudie = async (uid, role) => {
+      const userDoc = doc(db, "users", uid);
+      const newFields = { Studie: selectStudie.value};
+      await updateDoc(userDoc, newFields);
+    };
+    // update gender
+    const updateUserGender = async (uid, gender) => {
+      const userDoc = doc(db, "users", uid);
+      const newFields = { Gender: radioGender.value};
+      await updateDoc(userDoc, newFields);
+    };
+    // update userstatus
+    const updateUserStatus = async (uid, Status) => {
+      const userDoc = doc(db, "users", uid);
+      const newFields = { Status: radioGender.value};
+      await updateDoc(userDoc, newFields);
+    };
+
+
 
     return (
         <>
@@ -107,7 +135,7 @@ function ProfileCard() {
         <br/>
         <label for="messages" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose your studies</label>
         <select id="studies" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option selected>IT</option>
+        <option selected id="selectStudie">IT</option>
         <option value="TWO">Management</option>
         <option value="THREE">Marketing</option>
         <option value="FOUR">Art</option>
@@ -118,15 +146,15 @@ function ProfileCard() {
      
         <label for="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose your gender</label>
         <div className="flex items-center">
-    <input checked id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+    <input checked id="default-radio-2" class="radioGender" type="radio" value="Male" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     <label for="default-radio-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
 </div>
 <div className="flex items-center">
-    <input checked id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+    <input checked id="default-radio-2" class="radioGender" type="radio" value="Female" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     <label for="default-radio-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
 </div>
 <div className="flex items-center mb-4">
-    <input id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+    <input id="default-radio-1" type="radio" class="radioGender" value="Other" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
     <label for="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
 </div>
 <button className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Update</button>
