@@ -130,3 +130,11 @@
   background: rgba(255, 255, 255, 0.6);
   filter: blur(750px);
 }
+.homepage{
+  background: black;
+  color: white; 
+}
+
+.btnstart{
+  color: white;
+}

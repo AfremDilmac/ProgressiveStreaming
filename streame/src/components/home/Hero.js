@@ -18,7 +18,7 @@ const Hero = () => {
 
         <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px] w-full">
           Streaming 
-          <span className="text-gradient">Website</span>{" "}
+          <span className="text-gradient"> Website</span>{" "}
         </h1>
         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
           Newly created by two students of the Odisee University. Here you have the possibility to start live discussions in private and/or in public.
