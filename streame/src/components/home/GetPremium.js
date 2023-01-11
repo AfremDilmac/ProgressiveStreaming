@@ -8,7 +8,7 @@ const CardDeal = () => (
         Start meeting without limits,  get <span className="text-gradient">Premium</span>
       </h2>
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-        Want to start a meeting everywhere, anytime get Premium 
+        Want to start a chat everywhere, anytime get Premium 
       </p>
 
       <Button styles={`mt-10`} />

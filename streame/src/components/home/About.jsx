@@ -22,7 +22,7 @@ const Business = () =>  (
   <section id="features" className={layout.section}>
     <div className={layout.sectionInfo}>
       <h2 className={styles.heading2}>
-        You start a meeting, <br className="sm:block hidden" /> we’ll handle
+        You start a chat, <br className="sm:block hidden" /> we’ll handle
         the communication.
       </h2>
       <p className={`${styles.paragraph} max-w-[470px] mt-5`}>

@@ -12,7 +12,7 @@ const Footer = () => (
           className="w-[266px] h-[72.14px] object-contain"
         />
         <p className={`${styles.paragraph} mt-4 max-w-[312px]`}>
-          The Next Generation StreamingWebsite
+          The Next Generation Chatting Website
         </p>
       </div>
 
@@ -44,19 +44,6 @@ const Footer = () => (
         Copyright Ⓒ 2023 StreaMe. All Rights Reserved.
       </p>
 
-      <div className="flex flex-row md:mt-0 mt-6">
-        {socialMedia.map((social, index) => (
-          <img
-            key={social.id}
-            src={social.icon}
-            alt={social.id}
-            className={`w-[21px] h-[21px] object-contain cursor-pointer ${
-              index !== socialMedia.length - 1 ? "mr-6" : "mr-0"
-            }`}
-            onClick={() => window.open(social.link)}
-          />
-        ))}
-      </div>
     </div>
   </section>
 );
