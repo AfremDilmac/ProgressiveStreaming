@@ -41,6 +41,10 @@ const Register = () => {
               displayName,
               email,
               photoURL: downloadURL,
+              role: "user",
+              status:"EveryBody",
+              studie: "IT",
+              gender:"Male",
             });
 
             //create empty user chats on firestore
