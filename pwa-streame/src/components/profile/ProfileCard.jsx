@@ -8,9 +8,6 @@ import { getFirestore, doc, updateDoc } from "firebase/firestore";
 function ProfileCard() {
     const {currentUser} = useContext(AuthContext)
     
-    
-
-   
     const [photo, setPhoto] = useState(null);
     const [loading, setLoading] = useState(false);
     const [photoUrl, setPhotoURL] = useState("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png");
@@ -59,9 +56,6 @@ function ProfileCard() {
       if(e.target.files[0]){
       setPhoto(e.target.files[0])
      }
-
-
-
     }
       function handleChangeName(e) {
         setUsername(e.target.value);
@@ -107,17 +101,18 @@ function ProfileCard() {
       const newFields = { status: selectedValueStatus};
       await updateDoc(userDoc, newFields);
     };
+  
 
     function handleUpdate() {
       updateUserDisplayName(test);
-      
   }
+ 
     function handleUpdate2() {
       updateUserStudie(test);
       updateUserGender(test);
       updateUserStatus(test);
     }
-    
+  
     return (
         <>
           <div className="h-full">
@@ -140,7 +135,7 @@ function ProfileCard() {
    <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
      <div className="rounded  shadow p-6">
        <div className="pb-6">
-         <label htmlFor="name" className="font-semibold text-gray-700 block pb-1">{currentUser.displayName}</label>
+         <label htmlFor="name" className="font-semibold text-gray-700 block pb-1" >{currentUser.displayName} </label>
          <div className="flex">
            <input id="username" className="border-1 rounded-r px-4 py-2 w-full" type="text"placeholder={currentUser.displayName} value={username} onChange={handleChangeName}/>
          </div>
@@ -180,21 +175,8 @@ function ProfileCard() {
         <option value="Female">Female</option>
         <option value="Other">Other</option>
         </select>
+        
         <br/>
-
-        {/* <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Choose your gender</label>
-        <div className="flex items-center">
-    <input  id="default-radio-2" type="radio"  value="Male" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    <label htmlFor="default-radio-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
-</div> */}
-{/* <div className="flex items-center">
-    <input  id="default-radio-2" type="radio"  value="Female" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    <label htmlFor="default-radio-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
-</div>
-<div className="flex items-center mb-4">
-    <input id="default-radio-1" type="radio"  value="Other" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-    <label htmlFor="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Other</label>
-</div> */}
 <button  onClick={handleUpdate2} className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">Update</button>
      </div>
    </div>
