@@ -71,9 +71,9 @@ function ProfileCard() {
         setSelectedValueStatus(e.target.value);
        }
 
-    const [selectedValueStudie, setSelectedValueStudie] = useState('IT');
-    const [selectedValueGender, setSelectedValueGender] = useState('Male');
-    const [selectedValueStatus, setSelectedValueStatus] = useState('IT');
+    const [selectedValueStudie, setSelectedValueStudie] = useState();
+    const [selectedValueGender, setSelectedValueGender] = useState();
+    const [selectedValueStatus, setSelectedValueStatus] = useState();
     const [username, setUsername] = useState(currentUser.displayName);
 
       // studie update
@@ -82,7 +82,7 @@ function ProfileCard() {
         const newFields = { studie: selectedValueStudie};
         await updateDoc(userDoc, newFields);
       };
-    // DisplayName update
+    // DisplayName update firestore
     const updateUserDisplayName = async (uid, displayname) => {
       const userDoc = doc(db, "users", uid);
       const newFields = { displayName: username};
