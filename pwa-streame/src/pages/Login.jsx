@@ -31,6 +31,9 @@ const Login = () => {
           {err && <span>Something went wrong</span>}
         </form>
         <p>You don't have an account? <Link to="/register">Register</Link></p>
+        <Link 
+        className='font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500' 
+        to="/forgot-password">Forgot password?</Link>
       </div>
     </div>
   );

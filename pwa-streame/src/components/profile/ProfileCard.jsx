@@ -135,13 +135,13 @@ function ProfileCard() {
    <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
      <div className="rounded  shadow p-6">
        <div className="pb-6">
-         <label htmlFor="name" className="font-semibold text-gray-700 block pb-1" >{currentUser.displayName} </label>
+         <label htmlFor="name" className="font-semibold text-gray-700 block pb-1" >Username</label>
          <div className="flex">
            <input id="username" className="border-1 rounded-r px-4 py-2 w-full" type="text"placeholder={currentUser.displayName} value={username} onChange={handleChangeName}/>
          </div>
        </div>
        <div className="pb-4">
-         <label htmlFor="about" className="font-semibold text-gray-700 block pb-1">{currentUser.email}</label>
+         <label htmlFor="about" className="font-semibold text-gray-700 block pb-1">Email</label>
          <input disabled id="email" className="border-1  rounded-r px-4 py-2 w-full" type="email" value={currentUser.email}/>
          <span className=" mb-6 text-gray-600 pt-4 block opacity-70">Personal login in Formation of your account</span>
          <button className="-mb-4 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800" onClick={handleUpdate}>Update</button>

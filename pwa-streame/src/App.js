@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import AdminPanel from "./components/admin/AdminPanel";
 import {AuthContext} from "./context/AuthContext"
+import ForgotPassword from "./pages/ForgotPassword";
 import React, { useContext, useState, useEffect,  } from "react";
 
 function RouteAdmin(){
@@ -35,6 +36,7 @@ function App() {
           </Switch> */}
           <Route path="admin" element={<AdminPanel />} />
           <Route path="register" element={<Register />} />
+          <Route path="forgot-password" element={<ForgotPassword/>} />
       </Routes>
     </BrowserRouter>
   );

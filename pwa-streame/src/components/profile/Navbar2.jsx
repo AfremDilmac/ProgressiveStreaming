@@ -28,7 +28,7 @@ function Navbar2() {
                     </Link>
                 </li>
                 <li>
-                <Link to={'/app'}>
+                <Link to={'/chatapp'}>
                     <p href="#" className="text-gray-900 dark:text-white hover:underline">App</p>
                     </Link>
                 </li>
