@@ -28,11 +28,6 @@ function Navbar2() {
                     </Link>
                 </li>
                 <li>
-                <Link to={'/about'}>
-                    <p href="#" className="text-gray-900 dark:text-white hover:underline">About us</p>
-                    </Link>
-                </li>
-                <li>
                 <Link to={'/app'}>
                     <p href="#" className="text-gray-900 dark:text-white hover:underline">App</p>
                     </Link>
