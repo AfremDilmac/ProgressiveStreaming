@@ -1,12 +1,28 @@
 import { useState } from "react";
 import { close, menu } from "../../assets";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 import { navLinks } from "../../constants";
 import styles from "../../style";
+import React, { useContext } from "react";
+import { AuthContext } from '../../context/AuthContext'
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
+  const {currentUser} = useContext(AuthContext)
+
+  function GoToChat(){
+    
+  
+    if (currentUser == null){
+      alert("You must be logged in")
+    }
+  
+    if (currentUser != null){
+      navigate('/chatapp')
+    }
+  }
 
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
@@ -26,6 +42,7 @@ const Navbar = () => {
             <a href={`#${nav.id}`}>{nav.title}</a>
           </li>
         ))}
+        <button onClick={GoToChat} className="rounded-md p-2 ml-5 bg-violet-500">Go chat!</button>
       </ul>
 
       <div className="sm:hidden flex flex-1 justify-end items-center">

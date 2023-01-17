@@ -1,9 +1,9 @@
-import React from "react";
 import styles from '../style';
 import {Navbar, DownloadSoon, GetPremium, About, Promotion, Stats, Footer, Testimonials, Hero} from '../components/home';
-
+import React, { useContext, useState, useEffect,  } from "react";
 
 const Home = () => {
+
   return (
    <div className="bg-primary text-white w-full overflow-hidden homepage">
       <div className={`${styles.paddingX} ${styles.fexCenter}`}>

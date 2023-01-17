@@ -79,7 +79,7 @@ const Register = () => {
           </label>
           <button disabled={loading}>Sign up</button>
           {loading && "Uploading and compressing the image please wait..."}
-          {err && <span>Something went wrong</span>}
+          {err && console.log("test")}
         </form>
         <p>
           You do have an account? <Link to="/login">Login</Link>

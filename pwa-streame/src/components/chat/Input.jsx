@@ -17,9 +17,16 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 const Input = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
+  
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+
+  function handleEnterKeyPress(event) {
+    if (event.key === 'Enter') {
+      handleSend();
+    }
+  }
 
   const handleSend = async () => {
     if (img) {
@@ -80,6 +87,7 @@ const Input = () => {
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
         value={text}
+        onKeyPress={handleEnterKeyPress}
       />
       <div className="send">
         <img src={Attach} alt="" />
