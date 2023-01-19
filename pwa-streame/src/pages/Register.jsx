@@ -77,7 +77,7 @@ const Register = () => {
             <img src={Add} alt="" />
             <span>Add an avatar</span>
           </label>
-          <button disabled={loading}>Sign up</button>
+          <button className="bruin" disabled={loading}>Sign up</button>
           {loading && "Uploading and compressing the image please wait..."}
           {err && console.log("test")}
         </form>
