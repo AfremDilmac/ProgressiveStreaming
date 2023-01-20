@@ -4,6 +4,9 @@ import React, { useContext, useState, useEffect,  } from "react";
 import { AuthContext } from '../../context/AuthContext'
 import { upload } from "../../firebase";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
+import {getDoc} from "firebase/firestore";
+
+
 
 function ProfileCard() {
     const {currentUser} = useContext(AuthContext)
@@ -12,15 +15,15 @@ function ProfileCard() {
     const [loading, setLoading] = useState(false);
     const [photoUrl, setPhotoURL] = useState("https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png");
 
-
     const db = getFirestore();
     const test = currentUser.uid
     const docRef = doc(db, "users", `${test}`);
+    const uid = currentUser.uid;
+
 
     const data = {
       displayName: currentUser.displayName
     }
-    
 
     function update(){
     updateDoc(docRef, data)
@@ -32,13 +35,16 @@ function ProfileCard() {
     })
   }
 
-   
-
     function handleClick() {
       upload(photo, currentUser, setLoading);
     }
-  
 
+    function handleUpdate() {
+      updateUserDisplayName(test);
+      setUsername(username);
+    }
+
+  
     useEffect(() => {
       if (currentUser && currentUser.photoURL) {
         setPhotoURL(currentUser.photoURL);
@@ -61,19 +67,45 @@ function ProfileCard() {
         setUsername(e.target.value);
         }
 
-      function handleChangeStudie(e) {
-        setSelectedValueStudie(e.target.value);
-       }
-       function handleChangeGender(e) {
-        setSelectedValueGender(e.target.value);
-       }
-       function handleChangeStatus(e) {
-        setSelectedValueStatus(e.target.value);
-       }
 
-    const [selectedValueStudie, setSelectedValueStudie] = useState();
-    const [selectedValueGender, setSelectedValueGender] = useState();
+      // function handleChangeStudie(e) {
+      //   setSelectedValueStudie(e.target.value);
+      //  }
+      //  function handleChangeGender(e) {
+      //   setSelectedValueGender(e.target.value);
+      //  }
+      //  function handleChangeStatus(e) {
+      //   setSelectedValueStatus(e.target.value);
+      //  }
+
+    // const [selectedValueStudie, setSelectedValueStudie] = useState();
+    // const [selectedValueGender, setSelectedValueGender] = useState();
+    // const [selectedValueStatus, setSelectedValueStatus] = useState();
+    useEffect(() => {
+      const fetchUserData = async () => {
+          const userDoc = doc(db, "users", uid);
+          const userData = await getDoc(userDoc);
+          setSelectedValueStatus(userData.status);
+          setSelectedValueStudie(userData.studie);
+          setSelectedValueGender(userData.gender);
+      }
+      fetchUserData();
+  }, [currentUser]);
+  
     const [selectedValueStatus, setSelectedValueStatus] = useState();
+const [selectedValueStudie, setSelectedValueStudie] = useState();
+const [selectedValueGender, setSelectedValueGender] = useState();
+
+const handleChangeStatus = (event) => {
+  setSelectedValueStatus(event.target.value);
+}
+const handleChangeStudie = (event) => {
+  setSelectedValueStudie(event.target.value);
+}
+const handleChangeGender = (event) => {
+  setSelectedValueGender(event.target.value);
+}
+
     const [username, setUsername] = useState(currentUser.displayName);
 
       // studie update
@@ -102,17 +134,18 @@ function ProfileCard() {
       await updateDoc(userDoc, newFields);
     };
   
-
-    function handleUpdate() {
-      updateUserDisplayName(test);
-  }
- 
     function handleUpdate2() {
-      updateUserStudie(test);
-      updateUserGender(test);
-      updateUserStatus(test);
+      const userDoc = doc(db, "users", uid);
+      const newFields = { studie: selectedValueStudie, gender: selectedValueGender, status: selectedValueStatus};
+      updateDoc(userDoc, newFields);
+      setSelectedValueStudie(selectedValueStudie);
+      setSelectedValueGender(selectedValueGender);
+      setSelectedValueStatus(selectedValueStatus);
     }
+
   
+
+  console.log(currentUser);
     return (
         <>
           <div className="groen h-full">
@@ -158,6 +191,7 @@ function ProfileCard() {
 <div className="groen w-full md:w-5/5 p-8 shadow-md">
      <div className="rounded  shadow p-6">
      <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose who can send you a message</label>
+     <span>{currentUser.displayName}</span>
         <select id="messages" value={selectedValueStatus} onChange={handleChangeStatus} className="bg-violet-50 border border-brown-300 text-violet-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="Everybody">Everybody</option>
         <option value="People following the same courses as you">People following the same courses as you</option>
@@ -165,6 +199,7 @@ function ProfileCard() {
         </select>
         <br/>
         <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose your studies</label>
+        <span>{currentUser.studie}</span>
         <select value={selectedValueStudie} onChange={handleChangeStudie} className="bg-dark border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="IT">IT</option>
         <option value="Management">Management</option>
@@ -175,6 +210,7 @@ function ProfileCard() {
         </select>
         <br/>
         <label htmlFor="messages" className="block mb-2 text-sm font-medium text-violet-900 dark:text-white">Choose your gender</label>
+        <span>{currentUser.gender}</span>
         <select value={selectedValueGender} onChange={handleChangeGender} className="bg-violet-50 border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="Male">Male</option>
         <option value="Female">Female</option>
