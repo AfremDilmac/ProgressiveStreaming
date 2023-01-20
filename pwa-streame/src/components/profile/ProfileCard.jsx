@@ -7,8 +7,12 @@ import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import {getDoc} from "firebase/firestore";
 
 
-
 function ProfileCard() {
+  const inpUsername = document.getElementById("username");
+  const inpMessage = document.getElementById("messages");
+  const inpStudies = document.getElementById("studies");
+  const inpGender = document.getElementById("gender");
+
     const {currentUser} = useContext(AuthContext)
     
     const [photo, setPhoto] = useState(null);
@@ -20,7 +24,22 @@ function ProfileCard() {
     const docRef = doc(db, "users", `${test}`);
     const uid = currentUser.uid;
 
+    async function getUserData(){
 
+      const docRef = doc(db, "users", currentUser.uid);
+      const docSnap = await getDoc(docRef);
+      
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        inpUsername.value = docSnap.data().displayName;
+        inpMessage.value = docSnap.data().status;
+        inpStudies.value = docSnap.data().studie;
+        inpGender.value = docSnap.data().gender;
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }}
+      
     const data = {
       displayName: currentUser.displayName
     }
@@ -145,7 +164,6 @@ const handleChangeGender = (event) => {
 
   
 
-  console.log(currentUser);
     return (
         <>
           <div className="groen h-full">
@@ -168,6 +186,7 @@ const handleChangeGender = (event) => {
    <button onClick={() =>{deleteUser(test);} } className="bruin hover:bg-black text-white font-bold py-2 px-4 rounded">Delete Profile</button>
    </div>
    </Link>
+   <button onClick={getUserData} className="bruin mt-5 hover:bg-violet text-white font-bold py-2 px-4 rounded">Refresh Data</button>
    </div>
    
    <div className="groen w-full md:w-3/5 p-8 lg:ml-4 shadow-md">
@@ -191,8 +210,8 @@ const handleChangeGender = (event) => {
 <div className="groen w-full md:w-5/5 p-8 shadow-md">
      <div className="rounded  shadow p-6">
      <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose who can send you a message</label>
-     <span>{currentUser.displayName}</span>
-        <select id="messages" value={selectedValueStatus} onChange={handleChangeStatus} className="bg-violet-50 border border-brown-300 text-violet-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+     <span>{selectedValueStatus}</span>
+        <select id="messages" value="test" onChange={handleChangeStatus} className="bg-violet-50 border border-brown-300 text-violet-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="Everybody">Everybody</option>
         <option value="People following the same courses as you">People following the same courses as you</option>
         <option value="People who u send first a message to">People who u send first a message to</option>
@@ -200,7 +219,7 @@ const handleChangeGender = (event) => {
         <br/>
         <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose your studies</label>
         <span>{currentUser.studie}</span>
-        <select value={selectedValueStudie} onChange={handleChangeStudie} className="bg-dark border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select id="studies" value={selectedValueStudie} onChange={handleChangeStudie} className="bg-dark border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="IT">IT</option>
         <option value="Management">Management</option>
         <option value="Marketing">Marketing</option>
@@ -211,7 +230,7 @@ const handleChangeGender = (event) => {
         <br/>
         <label htmlFor="messages" className="block mb-2 text-sm font-medium text-violet-900 dark:text-white">Choose your gender</label>
         <span>{currentUser.gender}</span>
-        <select value={selectedValueGender} onChange={handleChangeGender} className="bg-violet-50 border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select id="gender" value={selectedValueGender} onChange={handleChangeGender} className="bg-violet-50 border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="Male">Male</option>
         <option value="Female">Female</option>
         <option value="Other">Other</option>

@@ -25,16 +25,7 @@ function App() {
           <Route path="/chatapp" element={< ChatApp/>} />
           <Route path="profile" element={<Profile />} />
           <Route path="login" element={<Login />} />
-          {/* <Switch>
-          <Route exact path="/admin">
-            {this.state.user ? (
-              <Dashboard />
-            ) : (
-              <Redirect to={"/login"} />
-            )}
-          </Route>
-          </Switch> */}
-          <Route path="admin" element={<AdminPanel />} />
+          <Route path="xclms145df5145sqsdlq" element={<AdminPanel />} />
           <Route path="register" element={<Register />} />
           <Route path="forgot-password" element={<ForgotPassword/>} />
       </Routes>
