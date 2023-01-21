@@ -12,6 +12,7 @@ function ProfileCard() {
   const inpMessage = document.getElementById("messages");
   const inpStudies = document.getElementById("studies");
   const inpGender = document.getElementById("gender");
+  const inpImg = document.getElementById("showImage");
 
     const {currentUser} = useContext(AuthContext)
     
@@ -35,6 +36,7 @@ function ProfileCard() {
         inpMessage.value = docSnap.data().status;
         inpStudies.value = docSnap.data().studie;
         inpGender.value = docSnap.data().gender;
+        inpImg.src = docSnap.data().photoURL
       } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -166,7 +168,7 @@ const handleChangeGender = (event) => {
 
     return (
         <>
-          <div className="groen h-full">
+          <div className="grijs h-full">
  
  <div className="block md:flex">
 
@@ -207,8 +209,9 @@ const handleChangeGender = (event) => {
    </div>
  </div>
 </div>
-<div className="groen w-full md:w-5/5 p-8 shadow-md">
-     <div className="rounded  shadow p-6">
+<div className='grijs p-8'>
+<div className="groen w-3/5 mx-auto md:w-5/5 mt-5 p-5 shadow-md">
+     <div className="rounded shadow p-6"> 
      <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose who can send you a message</label>
      <span>{selectedValueStatus}</span>
         <select id="messages" value="test" onChange={handleChangeStatus} className="bg-violet-50 border border-brown-300 text-violet-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -239,6 +242,7 @@ const handleChangeGender = (event) => {
         <br/>
 <button  onClick={handleUpdate2} className="-mt-2 text-md font-bold text-white bruin rounded-full px-5 py-2 hover:black">Update</button>
      </div>
+   </div >
    </div>
         </>
             );}
