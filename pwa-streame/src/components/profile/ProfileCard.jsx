@@ -213,11 +213,10 @@ const handleChangeGender = (event) => {
 <div className="groen w-3/5 mx-auto md:w-5/5 mt-5 p-5 shadow-md">
      <div className="rounded shadow p-6"> 
      <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose who can send you a message</label>
-     <span>{selectedValueStatus}</span>
+     <span>Who can send u a message: </span>
         <select id="messages" value="test" onChange={handleChangeStatus} className="bg-violet-50 border border-brown-300 text-violet-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="Everybody">Everybody</option>
-        <option value="People following the same courses as you">People following the same courses as you</option>
-        <option value="People who u send first a message to">People who u send first a message to</option>
+        <option value="Nobody">Nobody</option>
         </select>
         <br/>
         <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose your studies</label>
