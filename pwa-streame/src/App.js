@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import AdminPanel from "./components/admin/AdminPanel";
 import {AuthContext} from "./context/AuthContext"
 import ForgotPassword from "./pages/ForgotPassword";
+import Offline from "./components/offline/offline";
 import React, { useContext, useState, useEffect,  } from "react";
 
 function RouteAdmin(){
@@ -28,6 +29,8 @@ function App() {
           <Route path="xclms145df5145sqsdlq" element={<AdminPanel />} />
           <Route path="register" element={<Register />} />
           <Route path="forgot-password" element={<ForgotPassword/>} />
+          <Route path="offline" element={<Offline/>} />
+
       </Routes>
     </BrowserRouter>
   );
