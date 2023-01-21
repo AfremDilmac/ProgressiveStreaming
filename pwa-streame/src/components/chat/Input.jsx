@@ -111,7 +111,6 @@ const Input = () => {
         onKeyPress={handleEnterKeyPress}
       />
       <div className="send">
-        <img src={Attach} alt="" />
         <input
           type="file"
           style={{ display: "none" }}

@@ -145,11 +145,14 @@
 
           button {
             
-            color: #9f9f92;
+            color: white;
             font-size: 16px;
             border: none;
             margin-left: 5px;
             cursor: pointer;
+          &:hover{
+            color: #C9D5B5;
+          }
             @include tablet {
               float: right;
               bottom: 10px;
@@ -283,7 +286,7 @@
             .messageContent {
               align-items: flex-end;
               p {
-                background-color: #8da4f1;
+                background-color: #6d6466;
                 color: white;
                 border-radius: 10px 0px 10px 10px;
               }

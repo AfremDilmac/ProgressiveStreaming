@@ -10,8 +10,6 @@ import {getDoc} from "firebase/firestore";
 function ProfileCard() {
   const inpUsername = document.getElementById("username");
   const inpMessage = document.getElementById("messages");
-  const inpStudies = document.getElementById("studies");
-  const inpGender = document.getElementById("gender");
   const inpImg = document.getElementById("showImage");
 
     const {currentUser} = useContext(AuthContext)
@@ -34,8 +32,6 @@ function ProfileCard() {
         console.log("Document data:", docSnap.data());
         inpUsername.value = docSnap.data().displayName;
         inpMessage.value = docSnap.data().status;
-        inpStudies.value = docSnap.data().studie;
-        inpGender.value = docSnap.data().gender;
         inpImg.src = docSnap.data().photoURL
       } else {
         // doc.data() will be undefined in this case
@@ -157,14 +153,10 @@ const handleChangeGender = (event) => {
   
     function handleUpdate2() {
       const userDoc = doc(db, "users", uid);
-      const newFields = { studie: selectedValueStudie, gender: selectedValueGender, status: selectedValueStatus};
+      const newFields = { status: selectedValueStatus};
       updateDoc(userDoc, newFields);
-      setSelectedValueStudie(selectedValueStudie);
-      setSelectedValueGender(selectedValueGender);
       setSelectedValueStatus(selectedValueStatus);
     }
-
-  
 
     return (
         <>
@@ -210,35 +202,14 @@ const handleChangeGender = (event) => {
  </div>
 </div>
 <div className='grijs p-8'>
-<div className="groen w-3/5 mx-auto md:w-5/5 mt-5 p-5 shadow-md">
-     <div className="rounded shadow p-6"> 
-     <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose who can send you a message</label>
+<div className="groen w-3/5 mx-auto md:w-5/5 mt-5 p-4  mb-16 shadow-md">
+     <div className="rounded shadow  mb-20 p-6"> 
+     <label htmlFor="messages" className="block mb-6 text-ml font-medium text-profile dark:text-white">Choose who can send you a message</label>
      <span>Who can send u a message: </span>
-        <select id="messages" value="test" onChange={handleChangeStatus} className="bg-violet-50 border border-brown-300 text-violet-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <select id="messages" value={selectedValueStatus} onChange={handleChangeStatus} className="bg-violet-50 mb-9 border border-brown-300 text-violet-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <option value="Everybody">Everybody</option>
         <option value="Nobody">Nobody</option>
         </select>
-        <br/>
-        <label htmlFor="messages" className="block mb-2 text-sm font-medium text-profile dark:text-white">Choose your studies</label>
-        <span>{currentUser.studie}</span>
-        <select id="studies" value={selectedValueStudie} onChange={handleChangeStudie} className="bg-dark border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option value="IT">IT</option>
-        <option value="Management">Management</option>
-        <option value="Marketing">Marketing</option>
-        <option value="Art">Art</option>
-        <option value="Medic">Medic</option>
-        <option value="Psychology">Psychology</option>
-        </select>
-        <br/>
-        <label htmlFor="messages" className="block mb-2 text-sm font-medium text-violet-900 dark:text-white">Choose your gender</label>
-        <span>{currentUser.gender}</span>
-        <select id="gender" value={selectedValueGender} onChange={handleChangeGender} className="bg-violet-50 border border-brown-300 text-profile text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-violet-700 dark:border-violet-600 dark:placeholder-violet-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-        </select>
-        
-        <br/>
 <button  onClick={handleUpdate2} className="-mt-2 text-md font-bold text-white bruin rounded-full px-5 py-2 hover:black">Update</button>
      </div>
    </div >
