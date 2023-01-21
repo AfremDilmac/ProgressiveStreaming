@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { close, menu } from "../../assets";
 import {Link, useNavigate } from 'react-router-dom';
 import { navLinks } from "../../constants";
@@ -13,12 +13,32 @@ const Navbar = () => {
   const [active, setActive] = useState("Home");
   const [toggle, setToggle] = useState(false);
   const {currentUser} = useContext(AuthContext)
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+
+  useEffect(() => {
+    // Update network status
+    const handleStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    // Listen to the online status
+    window.addEventListener('online', handleStatusChange);
+
+    // Listen to the offline status
+    window.addEventListener('offline', handleStatusChange);
+
+    // Specify how to clean up after this effect for performance improvment
+    return () => {
+      window.removeEventListener('online', handleStatusChange);
+      window.removeEventListener('offline', handleStatusChange);
+    };
+}, [isOnline]);
 
   function GoToChat(){
     
-  
-    if (currentUser == null){
-      toast.warn('U have to be logged in!', {
+    if (!isOnline) {
+      toast.error('You do not have internet connection', {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -29,9 +49,23 @@ const Navbar = () => {
         theme: "light",
         });
     }
-  
-    if (currentUser != null){
-      navigate('/chatapp')
+    if (isOnline) {
+      if (currentUser == null){
+        toast.warn('U have to be logged in!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }
+    
+      if (currentUser != null){
+        navigate('/chatapp')
+      }
     }
   }
 
